@@ -1,11 +1,12 @@
 '''
 Author: Reagan Hay
-tools: requests, json, NASA API
+tools: requests, json, re, NASA API
 
 '''
 
 import requests
 import json
+import re
 
 ## url
 url = 'https://api.nasa.gov/planetary/apod?api_key='
@@ -31,7 +32,8 @@ for header in json_data:
 image = requests.get(image_url)
 
 ## get the name of the image
-filename = image_url[38:]
+regex_match = re.search('([^\/]*(.jpg))', image_url)
+filename = regex_match.group(0)
 
 ## open the file and write the image to it
 file = open(filename, "wb")
