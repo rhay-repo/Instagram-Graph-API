@@ -1,7 +1,7 @@
 # NASA-Astronomy-Photo-Of-the-Day
 Personal project with NASA's API
 
-Link to Api: https://api.nasa.gov/
+Link to NASA Api: https://api.nasa.gov/
 
 # Details
 This code will grab NASA's "Astronomy Photo Of the Day" and save it to the same directory as this script as a .jpg
