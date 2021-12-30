@@ -1,18 +1,20 @@
 '''
 Author: Reagan Hay
-tools: requests, json, re, NASA API
+tools: requests, pprint, json, re, PIL, NASA API
 
 '''
 
 import requests
 import json
 import re
+from pprint import pprint
+from PIL import Image
 
 ## url
 url = 'https://api.nasa.gov/planetary/apod?api_key='
 
 ## key
-key = #PASTE YOUR KEY HERE#
+key = '9TgPZfReTnC88xmszgy6WvHnLTxa0arXFFOn6czP'
 
 ## retrieve all APOD data
 r = requests.get(url + key)
@@ -31,11 +33,18 @@ for header in json_data:
 ## save the image
 image = requests.get(image_url)
 
-## get the name of the image
+## get the name of the image via regular expression
 regex_match = re.search('([^\/]*(.jpg))', image_url)
-filename = regex_match.group(0)
+file_name = regex_match.group(0)
+
+print(file_name)
 
 ## open the file and write the image to it
-file = open(filename, "wb")
+file = open(file_name, 'wb')
 file.write(image.content)
 file.close()
+
+view_image = input('Would you like to view the image now? (y/n)\n')
+if view_image == 'y':
+	image = Image.open(file_name)
+	image.show()
